@@ -1,6 +1,6 @@
 // Definición de gráfica
-    var madre = new TimeSeries();
-    var hijo  = new TimeSeries();
+    var elementOne = new TimeSeries();
+    var elementTwo  = new TimeSeries();
     var opt_sm = {
         grid: {
             strokeStyle : 'rgba(119,119,119,0.20)',
@@ -10,11 +10,11 @@
         timestampFormatter: SmoothieChart.timeFormatter
     }
     var smoothie = new SmoothieChart(opt_sm);
-    smoothie.addTimeSeries(madre, {
+    smoothie.addTimeSeries(elementOne, {
         strokeStyle: 'rgb(0, 255, 0)', 
         lineWidth: 2
     });
-    smoothie.addTimeSeries(hijo, {
+    smoothie.addTimeSeries(elementTwo, {
         strokeStyle: 'rgb(255, 0, 255)',
         lineWidth: 2
     });
@@ -30,14 +30,14 @@
         });
     });
     webSocket.on("datos_servidor", function(data) {
-        for (var x = 0; x < data.mom.length; x++) {
-            if (data.mom[x]!=0) {
-                madre.append(new Date().getTime(), data.mom[x]);
+        for (var x = 0; x < data.elementTwo.length; x++) {
+            if (data.elementTwo[x]!=0) {
+                elementOne.append(new Date().getTime(), data.elementTwo[x]);
             };
         }
-        for (var z = 0; z < data.child.length; z++) {
-            if (data.child[z]!=0) {
-                hijo.append(new Date().getTime(), data.child[z]);
+        for (var z = 0; z < data.elementOne.length; z++) {
+            if (data.elementOne[z]!=0) {
+                elementTwo.append(new Date().getTime(), data.elementOne[z]);
             };
         }
     });
